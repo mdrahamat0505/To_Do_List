@@ -1,6 +1,6 @@
 {
-    "name": "to_do_app",
-    "short_name": "to_do_app",
+    "name": "github_repositories",
+    "short_name": "github_repositories",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
