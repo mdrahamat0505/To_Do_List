@@ -22,23 +22,15 @@ class AddTaskController extends GetxController {
   final DateFormat dateFormatter = DateFormat('MMM dd, yyyy');
   final List<String> priorities = ['Low', 'Medium', 'High'];
 
-  // _handleDatePicker() async {
-  //   final DateTime? date = await showDatePicker(
-  //     context: context,
-  //     initialDate: _date,
-  //     firstDate: DateTime(2000),
-  //     lastDate: DateTime(2100),
-  //   );
-  //   if (date != null && date != _date) {
-  //     setState(() {
-  //       date = date;
-  //     });
-  //     dateController.text = dateFormatter.format(date);
-  //   }
-  // }
 
-  delete() {
-    // DatabaseHelper.instance.deleteTask(1);
+  delete(id) {
+   //  DatabaseHelper.instance.deleteTask(1);
+     DatabaseHelper.instance.delete(id).then((value) {
+       titleController.text = '';
+       descriptionController.text = '';
+       date = DateTime.now();
+       Get.back();
+     });
     Get.back();
     homeC.getData();
 
@@ -46,7 +38,7 @@ class AddTaskController extends GetxController {
         duration: Toast.lengthShort, gravity: Toast.bottom);
   }
 
-  updateTask(Task taskUpdate) {
+  updateTask(id) {
     Task task = Task(
         title: titleController.text,
         descriptio: descriptionController.text,
@@ -55,22 +47,22 @@ class AddTaskController extends GetxController {
     if (task != null) {
       task.status = 0;
 
-      DatabaseHelper.instance.insert(task).then((value) {
+      DatabaseHelper.instance.update(id).then((value) {
         titleController.text = '';
         descriptionController.text = '';
         date = DateTime.now();
         Get.back();
       });
       //
-      Toast.show("New Task Added",
-          duration: Toast.lengthLong, gravity: Toast.center);
+      Toast.show("Task Updated",
+          duration: Toast.lengthShort, gravity: Toast.bottom);
     }
-    Toast.show("Task Updated",
-        duration: Toast.lengthShort, gravity: Toast.bottom);
     // }
     Get.put(const HomeScreen());
     homeC.getData();
   }
+
+
 
   submit() {
     // if (_formKey.currentState!.validate()) {
@@ -104,8 +96,6 @@ class AddTaskController extends GetxController {
     //   task.status = task.status;
     //   DatabaseHelper.instance.updateTask(task);
     //
-    Toast.show("Task Updated",
-        duration: Toast.lengthShort, gravity: Toast.bottom);
     // }
     Get.put(const HomeScreen());
     homeC.getData();

@@ -6,7 +6,6 @@ import 'package:toast/toast.dart';
 
 import '../config/base.dart';
 import '../helpers/database_helper.dart';
-import '../repositories_details.dart';
 import 'add_task_screen.dart';
 import 'history_screen.dart';
 
@@ -31,24 +30,10 @@ class _HomeScreenState extends State<HomeScreen> with Base {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         child: const Icon(Icons.add_outlined),
-        // onPressed: () => Get.to(AddTaskScreen()),
-
-        // onPressed: () {
-        //   log('Hello how are you');
-        //   Get.offAll(AddTaskScreen());
-        // },
 
         onPressed: () {
           Get.to(() => const AddTaskScreen());
-          // Get.to(
-          //   const RepositoriesDetails(),
-          // );
 
-          //Get.toNamed('/repositories_details');
-          //Get.off(const RepositoriesDetails());
-          //Get.offAll(const RepositoriesDetails());
-          //Get.back();
-          //Controller controller = Get.put(Controller()); // Rather Controller controller = Controller();
         },
       ),
       appBar: AppBar(
@@ -90,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> with Base {
                 icon: const Icon(Icons.history_outlined),
                 iconSize: 25.0,
                 color: Colors.black,
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const HistoryScreen()))),
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryScreen()))),
           ),
           Container(
             margin: const EdgeInsets.all(6.0),
@@ -99,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> with Base {
                 icon: const Icon(Icons.settings_outlined),
                 iconSize: 25.0,
                 color: Colors.black,
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Settings()))),
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const Settings()))),
           )
         ],
       ),
@@ -110,8 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with Base {
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
             return Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+              padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -147,37 +129,29 @@ class _HomeScreenState extends State<HomeScreen> with Base {
                     '${homeC.taskList.value[index].title}',
                     style: TextStyle(
                       fontSize: 18.0,
-                      decoration: homeC.taskList.value[index].status == 0
-                          ? TextDecoration.none
-                          : TextDecoration.lineThrough,
+                      decoration: homeC.taskList.value[index].status == 0 ? TextDecoration.none : TextDecoration.lineThrough,
                     ),
                   ),
                   subtitle: Text(
                     '${homeC.dateFormatter.format(homeC.taskList.value[index].date as DateTime)} • ${homeC.taskList.value[index].priority}',
                     style: TextStyle(
                       fontSize: 15.0,
-                      decoration: homeC.taskList.value[index].status == 0
-                          ? TextDecoration.none
-                          : TextDecoration.lineThrough,
+                      decoration: homeC.taskList.value[index].status == 0 ? TextDecoration.none : TextDecoration.lineThrough,
                     ),
                   ),
                   trailing: Checkbox(
                     onChanged: (value) {
                       homeC.taskList.value[index].status = true ? 1 : 0;
-                      DatabaseHelper.instance
-                          .update(homeC.taskList.value[index]);
+                      DatabaseHelper.instance.update(homeC.taskList.value[index]);
 
-                      Toast.show("Task Completed",
-                          duration: Toast.lengthShort, gravity: Toast.bottom);
+                      Toast.show("Task Completed", duration: Toast.lengthShort, gravity: Toast.bottom);
                       homeC.getData();
                     },
                     activeColor: Theme.of(context).primaryColor,
-                    value:
-                        homeC.taskList.value[index].status == 1 ? true : false,
+                    value: homeC.taskList.value[index].status == 1 ? true : false,
                   ),
                   onTap: () {
-                    Get.to(() =>
-                        UpdateTaskScreen(task: homeC.taskList.value[index]));
+                    Get.to(() => UpdateTaskScreen(task: homeC.taskList.value[index]));
                   },
                 ),
               ],

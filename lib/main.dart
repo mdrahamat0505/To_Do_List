@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_repositories/views/home_screen.dart';
 
-import 'home_page.dart';
 
 void main() {
   runApp(MyApp());

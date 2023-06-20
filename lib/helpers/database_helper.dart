@@ -30,26 +30,6 @@ class DatabaseHelper {
 // 1     ''      ''      ''         0
 // 2     ''      ''      ''         0
 
-  // Future<Database?> get db async {
-  //   if (_db == null) {
-  //     _db = await _initDb();
-  //   }
-  //   return _db;
-  // }
-  //
-  // Future<Database> _initDb() async {
-  //   Directory dir = await getApplicationDocumentsDirectory();
-  //   String path = dir.path + '/todo_list.db';
-  //   final todoListDb =
-  //       await openDatabase(path, version: 1, onCreate: _createDb);
-  //   return todoListDb;
-  // }
-  //
-  // void _createDb(Database db, int version) async {
-  //   await db.execute(
-  //     'CREATE TABLE $tasksTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, $colDate TEXT, $colPriority TEXT, $colStatus INTEGER)',
-  //   );
-  // }
 
   Future<Database?> get db async {
     if (_db != null) return _db;
@@ -153,19 +133,19 @@ class DatabaseHelper {
   Future<List> getAllUsers() async {
     List<Task> user = [];
     var dbClient = await db;
-    Map<String, dynamic> maps = (await dbClient!.query(tableUser, columns: [
+    var maps = (await dbClient!.query(tableUser, columns: [
       colId,
       colTitle,
       colDes,
       colDate,
       colPriority,
       colStatus
-    ])) as Map<String, dynamic>;
+    ]));
     if (maps.length > 0) {
       maps.forEach((f) {
         user.add(Task.fromMap(f));
 //          print("getAllUsers"+ User.fromMap(f).toString());
-      } as Function(String key, dynamic value));
+      });
     }
     return user;
   }

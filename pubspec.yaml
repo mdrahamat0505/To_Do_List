@@ -33,7 +33,7 @@ dependencies:
   get: ^4.6.5
   http: ^0.13.5
   path_provider: ^2.0.15
-  android_path_provider: ^0.3.0
+#  android_path_provider: ^0.3.0
   connectivity_plus: ^4.0.1
   dotted_border: ^2.0.0+3
   sqflite: ^2.2.8+4

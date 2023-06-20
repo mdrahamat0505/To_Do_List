@@ -24,21 +24,14 @@ class HomeController extends GetxController {
     super.onReady();
   }
 
-  // updateTaskList() {
-  //   taskLists = DatabaseHelper.instance.getTaskList();
-  //   if (taskLists != null) {
-  //     // taskList.value.addAll(taskLists);
-  //   }
-  // }
-
   ///Fetch data from database
   getData() async {
     var dbHelper = DatabaseHelper();
     await dbHelper.getAllUsers().then((value) {
-      list  = value as List<Task>;
+      list.addAll(value as List<Task>);
 
       if(list != null){
-        taskList.addAll(list);
+        taskList.value.addAll(list);
       }
     });
 

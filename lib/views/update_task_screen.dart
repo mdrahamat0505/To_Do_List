@@ -74,8 +74,8 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> with Base {
                         onSaved: (val) {
                           addC.titleController.text = val as String;
                         },
-                        initialValue:
-                            widget.task.title != null ? widget.task.title : '',
+                        // initialValue:
+                        //     widget.task.title != null ? widget.task.title : '',
                       ),
                     ),
                     Padding(
@@ -95,9 +95,9 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> with Base {
                         onSaved: (val) {
                           addC.descriptionController.text = val as String;
                         },
-                        initialValue: widget.task.descriptio != null
-                            ? widget.task.descriptio
-                            : '',
+                        // initialValue: widget.task.descriptio != null
+                        //     ? widget.task.descriptio
+                        //     : '',
                       ),
                     ),
                     Padding(
@@ -163,7 +163,7 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> with Base {
                       // ignore: deprecated_member_use
                       child: TextButton(
                         onPressed: () async {
-                          addC.submit();
+                          addC.delete(widget.task.id);
                         },
                         child: const Text(
                           'Delete',
